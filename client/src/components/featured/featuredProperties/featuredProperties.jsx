@@ -1,50 +1,28 @@
-import "./featuredProperties.css"
+import useFetch from "../../../hooks/useFetch";
+import "./featuredProperties.css";
 
-const featuredProperties = () => {
+const FeaturedProperties = () => {
+    const {data,loading,error } = useFetch("/hotels?featured=false");
+
   return (
     <div className="fp">
-        <div className="fpItem">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ervgiZpiejGhq0Bvh5AIc2DBrFR7qYum-A&usqp=CAU" alt="" className="fpImg" />
-        <span className="fpName">dsa</span>
-        <span className="fpCity">delhi</span>
-        <span className="fpPrice">&#8377;  1000</span>
-        <div className="fpRating">
-            <button>8.0</button>
+    {loading ? ("Loading"):
+    (<>
+        {data.map((item)=>(
+            <div className="fpItem" key={item._id}>
+        <img src= {item.photos[0]} alt="photo" className="fpImg" />
+        <span className="fpName">{item.name}</span>
+        <span className="fpCity">{item.city}</span>
+        <span className="fpPrice"> starting from &#8377; {item.cheapestPrice}</span>
+       { item.rating && <div className="fpRating">
+            <button>{item.rating}</button>
             <span>Good</span>
+        </div>}
         </div>
-        </div>
-        <div className="fpItem">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ervgiZpiejGhq0Bvh5AIc2DBrFR7qYum-A&usqp=CAU" alt="" className="fpImg" />
-        <span className="fpName">dsa</span>
-        <span className="fpCity">delhi</span>
-        <span className="fpPrice">&#8377; 1000</span>
-        <div className="fpRating">
-            <button>8.0</button>
-            <span>Good</span>
-        </div>
-        </div>
-        <div className="fpItem">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ervgiZpiejGhq0Bvh5AIc2DBrFR7qYum-A&usqp=CAU" alt="" className="fpImg" />
-        <span className="fpName">dsa</span>
-        <span className="fpCity">delhi</span>
-        <span className="fpPrice">&#8377; 1000</span>
-        <div className="fpRating">
-            <button>8.0</button>
-            <span>Good</span>
-        </div>
-        </div>
-        <div className="fpItem">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ervgiZpiejGhq0Bvh5AIc2DBrFR7qYum-A&usqp=CAU" alt="" className="fpImg" />
-        <span className="fpName">dsa</span>
-        <span className="fpCity">delhi</span>
-        <span className="fpPrice">&#8377; 1000</span>
-        <div className="fpRating">
-            <button>8.0</button>
-            <span>Good</span>
-        </div>
-        </div>
+        ))}
+        </>)}
     </div>
-  )
-}
+  );
+};
 
-export default featuredProperties
+export default FeaturedProperties

@@ -25,4 +25,4 @@ import Footer from "../../components/footer/Footer"
    )
  }
  
- export default home
+ export default home;
