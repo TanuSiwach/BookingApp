@@ -1,22 +1,22 @@
+import { Link } from "react-router-dom";
 import "./searchitem.css"
 
-const SearchItem=()=> {
+const SearchItem=({item})=> {
 
     return (
         <div className="searchItem">
-           <img src="https://media.designcafe.com/wp-content/uploads/2021/09/27095756/bedroom-design-with-window-bay-seating.jpg" 
+           <img src={item.photos[0]}
            alt=""  
            className="siImg"
            />        
           <div className="siDesc">
-            <h1 className="siTitle">Tower Street  Apartments</h1>
-            <span className="siDistance"> 500m from center</span>
+            <h1 className="siTitle">{item.name}</h1>
+            <span className="siDistance"> {item.distance}</span>
             <span className="siTaxiOp">Free airport taxi</span>
             <span className="siSubtitle"> 
             Studio Apartment with conditioning
             </span>
-            <span className="siFeatures"> 
-            Entire Studio &#183; 1 bathroom &#183; 21m<sup className="subb" >2</sup> 1 king size bed
+            <span className="siFeatures"> {item.desc}
             </span>
             <span className="siCancelOp">Free Cancellation</span>
             <span className="siCancelOpSubtitle">
@@ -24,14 +24,16 @@ const SearchItem=()=> {
             </span>
           </div>
           <div className="siDetails"> 
-           <div className="siRating">
+          {item.rating && <div className="siRating">
              <span>Excellent</span>
-             <button>8.9</button>
-           </div>
+             <button>{item.rating}</button>
+           </div>}
            <div className="siDetailsTexts">
-             <span className="siPrice"> &#8377; 1000</span>
-             <span className="siTaxOp"> Includes Tax and Fees</span>
+             <span className="siPrice"> &#8377; {item.cheapestPrice} </span>
+             <span className="siTaxOp"> Includes Tax and Fees</span> 
+             <Link to={`/hotels/${item._id}`}>
              <button className="siCheckButton"> See Availability</button>
+             </Link>
            </div>
           </div>
         </div>
