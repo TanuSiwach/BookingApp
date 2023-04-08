@@ -10,6 +10,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css'
 import {format} from "date-fns"
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({type}) => {
     const [destination, setDestination]=useState("");
@@ -29,6 +30,7 @@ const Header = ({type}) => {
     })
 
     const navigate = useNavigate();
+    const {user}=useContext(AuthContext);
     const handleOption=(name,operation)=>{
         setOptions((prev)=>{
             return {
@@ -61,7 +63,7 @@ const Header = ({type}) => {
             <p className="headerDesc">
                 Create your free account
             </p>
-            <button className="headerBtn">Sign In / Register</button>
+            {!user && <button className="headerBtn">Sign In / Register</button>}
             <div className="headerSearch">
                 <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faHotel} className="headerIcon"/>
