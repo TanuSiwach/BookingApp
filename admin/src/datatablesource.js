@@ -37,7 +37,7 @@ export const userColumns = [
 
 ];
 
-export const hotelsColumns=[
+export const hotelColumns=[
   { field: "_id", headerName: "ID",width: 250},
   {
     field: "name",
